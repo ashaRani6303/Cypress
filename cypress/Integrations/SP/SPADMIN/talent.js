@@ -24,7 +24,7 @@ describe('Add talent case', function () {
         if (display === 'block') {
           cy.log("Modal is open");
         } else {
-          cy.log("Modal is closed");
+          cy.log("Modal is closed and done");
         }
       })
       cy.get("#request-cancel").contains('Confirm').click();
