@@ -1,14 +1,36 @@
-describe('Add talent case',function(){
-it('Add talent', function()
-{
-    let data="";
+describe('Add talent case', function () {
+  it('Add talent', function () {
+    let data = "";
     cy.fixture('example').then((fdata) => {
-        data= fdata;
-        
-        cy.visit(data.adminurl);
-        cy.adminLogin(data.adminusername, data.adminpassword);
-        
-  // load data from logo.png
-})
-})
+      data = fdata;
+
+      cy.visit(data.adminurl);
+      cy.adminLogin(data.adminusername, data.adminpassword);
+      cy.get('#quick-search-input').click().type('Succession');
+      cy.wait(8000);
+      cy.get(".ah-quick-search-main-title").contains("Talent Hub").click();
+      //when there is text by using class name we can write like this
+      cy.get(".ah-btn.ah-btn-icon").contains("Add").click();
+      cy.wait(4000);
+      cy.get("[formcontrolname='name']").type('Cypress talent 5').should('have.value', 'Cypress talent 5').click(); //this is attribute selector
+      cy.get(".ah-unselect-text").click();
+      cy.wait(4000);
+      cy.get('.ah-emp-search > .input-group > .form-control').type("TEST008{enter}").should('have.value', 'TEST008');
+      //replace with "." when there is space in classname and write enter when we need to enter any data
+      cy.get(".ah-employee-col-meta.meta-data-set").click();
+      cy.get('#request-cancel-modify').contains('Submit').click();
+      cy.get("#confirmNew").then(($el) => {
+        const display = $el.css('display');
+        if (display === 'block') {
+          cy.log("Modal is open");
+        } else {
+          cy.log("Modal is closed");
+        }
+      })
+      cy.get("#request-cancel").contains('Confirm').click();
+      cy.contains('Talent has been added successfully!').should('be.visible');
+      cy.get("#request-submit-close").click();
+
+    })
+  })
 })
