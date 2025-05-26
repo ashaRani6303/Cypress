@@ -22,7 +22,7 @@ describe('Add talent case', function () {
       cy.get("#confirmNew").then(($el) => {
         const display = $el.css('display');
         if (display === 'block') {
-          cy.log("Modal is open");
+          cy.log("Modal is opened");
         } else {
           cy.log("Modal is closed and done");
         }
