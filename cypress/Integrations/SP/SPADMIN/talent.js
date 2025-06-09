@@ -7,6 +7,19 @@ describe('Add talent case', function () {
     Admin.selectModule("Succession", "Talent Hub");
   })
   it('Add talent Success Case', function () {
-    Talenthub.addTalent
+    Talenthub.addTalent("Test cyp talent", "EMP-019");
+  })
+  it('Search and verify talent', function () {
+    Talenthub.searchAndVerifyTalent("Test cyp talent");
+  })
+  it('verifyTalentDetails', function () {
+    const talentDetails = {
+      talentName: "Test cyp talent",
+      talentOwner: "RAMESH"
+    };
+    Talenthub.verifyTalentDetails(talentDetails);
+  })
+  it('Update talent', function () {
+    Talenthub.updateTalent();
   })
 })
