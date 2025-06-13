@@ -44,7 +44,14 @@ class Talenthub {
     updateTalent() {
         cy.get("[name='update']").click();
         cy.wait(4000);
-        cy.get("[formcontrolname='name']").type
+        cy.get("[formcontrolname='name']").type("Updated").should('have.value', "Test cyp talent Updated");
+    }
+    deactivateTalent() {
+        cy.get("[name='deactivate']").click();
+        cy.wait(4000);
+        cy.get("#request-cancel").contains('Confirm').click();
+        cy.contains('Talent has been deactivated successfully!').should('be.visible');
+        cy.get("#request-submit-close").click();
     }
 
 }
